@@ -4,21 +4,14 @@ var theme = 'dark';
     'use strict';
 
     //set the active pill and section on first load
-    var section = (document.location.hash) ? document.location.hash.slice(1) : '';
+    //var section = (document.location.hash) ? document.location.hash.slice(1) : '';
 
-    if (section.indexOf("bugzilla") != -1) {
-      $('#trunk').load('charts/bugzilla/' + section + '.htm', function() {
+    $('#trunk').load('charts/triage-metrics.htm', function() {
         $('pre code').each(function(i, block) {
             hljs.highlightBlock(block);
         });
-      });
-    } else {
-      $('#trunk').load('charts/' + section + '.htm', function() {
-        $('pre code').each(function(i, block) {
-            hljs.highlightBlock(block);
-        });
-      });
-    }
+    });
+    
 
     $('.menu a#goto-' + section).addClass('active');
 

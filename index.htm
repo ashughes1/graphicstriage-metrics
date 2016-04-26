@@ -30,79 +30,7 @@
     <div class='container'>
         <div id='content-body'>
             <div id='head'>
-                <h3>Graphics Quality Metrics</h3>
-                <div id='footer'>
-                    Created by <a href="mailto:ahughes@mozilla.com">ashughes</a> (<a href='https://github.com/ashughes1/metrics-graphics-gfx'>source</a>)<br />
-                    Powered by <a href='http://metricsgraphicsjs.org'>MetricsGraphics.js 2.8</a> (<a href='https://github.com/mozilla/metrics-graphics'>source</a>)
-                </div>
-                <hr />
-                <div style="width:100%; text-align:center">
-                    <select id='select_metric'>
-                        <optgroup label="Firefox">
-                            <option value='firefox-adi'>Active Daily Installations</option>
-                            <option value='crashes-by-channel'>Crashes by Channel [NEW]</option>
-                            <option value='crashes-by-platform'>Crashes by Platform [NEW]</option>
-                            <option value='crashes-by-vendor'>Crashes by Vendor [NEW]</option>
-                            <option value='graphics-critical-error'>Crashes with a graphics-critical-error</option>
-                            <option value='driver-crashes'>Crashes in a vendor's graphics driver</option>
-                            <option value='crashes-graphics-startup-test-by-vendor'>Crashes during the graphics startup test</option>
-                            <option value='crashes-mozcrash-by-vendor'>MOZ_CRASH crashes by vendor</option>
-                        </optgroup>
-                        <optgroup label="Fennec">
-                            <option value='android-crashes'>Overall crash volume in GFX</option>
-                            <option value='android-crashes-by-device'>Top-5 devices in overall crash volume</option>
-                            <option value='android-crashes-by-device-gfx'>Top-5 devices in GFX crash volume</option>
-                            <option value='android-crashes-by-api'>Top-5 Android versions in overall crash volume</option>
-                            <option value='android-crashes-by-api-gfx'>Top-5 Android versions in GFX crash volume</option>
-                        </optgroup>
-                        <optgroup label="Bugzilla">
-                            <option value="bugzilla-all">Dashboard of all Bugzilla graphs</option>
-                            <option value="bugzilla-gfx-by-component">Bug breakdown by component</option>
-                        </optgroup>
-                        <optgroup label="Prototypes (not production-ready)">
-                            <option value='graphics-factor'>Graphics Factor (Release vs Beta)</option>
-                            <option value='gpu-distribution-release-vs-beta'>GPU Distribution (Release vs Beta)</option>
-                            <option value='gfx-signature-breakdown'>Signature breakdown by component</option>
-                            <option value='crashes-wgl'>WGL+ Crashes</option>
-                            <option value='success-rate-d2d11'>D2D1.1 Success Rate</option>
-                            <option value='success-rate-d3d11layers'>D3D11 Layers Success Rate</option>
-                            <option value='success-rate-webgl'>WebGL Success Rate</option>
-                            <option value='android-hardware'>Android Hardware</option>
-                            <option value='gce-memory-footprint'>GCE Memory Footprint</option>
-                            <option value='gce-reason'>GCE Reasons</option>
-                            <option value='gfx-crashes-by-vendor'>GFX</option>
-                            <option value='crashes-gfx-percent'>GFX (%)</option>
-                            <option value='layers-crashes-by-vendor'>Layers</option>
-                            <option value='crashes-android'>Android</option>
-                            <option value='webgl-percent'>WebGL</option>
-                            <option value='devices-percent'>Devices (%)</option>
-                            <option value='driver-percents'>Drivers (%)</option>
-                            <option value='startup-crashes'>Startup</option>
-                            <option value='shutdown-crashes'>Shutdown</option>
-                            <option value='crashes-percentage'>Startup vs Shutdown</option>
-                            <option value='gce-crashes'>GCE</option>
-                            <option value='lowmem-crashes'>OOM</option>
-                            <option value='mozcrash-gfx_crash-by-channel'>MOZ_CRASH(GFX_CRASH) by Channel (Filtered)</option>
-                            <option value='mozcrash-gfx_crash-by-channel0'>MOZ_CRASH(GFX_CRASH) by Channel (All)</option>
-                            <option value='mozcrash-outin'>MOZ_CRASH Graphics vs Other</option>
-                            <option value='crashes-intel-0x0046'>Intel 0x0046</option>
-                            <option value='intel-latest-driver'>Latest Intel</option>
-                            <option value='amd-latest-driver'>Latest AMD</option>
-                            <option value='nvidia-latest-driver'>Latest NVIDIA</option>
-                            <option value='all-latest-driver'>Latest ALL (%)</option>
-                            <option value='all-latest-driver-count'>Latest ALL (Count)</option>
-                            <option value='nvidia-driver-crashes'>NVIDIA driver crashes</option>
-                            <option value='amd-driver-crashes'>AMD driver crashes</option>
-                            <option value='intel-driver-crashes'>Intel driver crashes</option>
-                            <option value='safemode-crashes'>Safemode crashes</option>
-                        </optgroup>
-                    </select>
-                    <button id='load' class='load'>Load</button>
-                </div>
-                
-                <hr />
                 <div id='trunk'></div>
-
             </div>
 
     </div> <!-- end container -->
