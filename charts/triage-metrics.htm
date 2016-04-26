@@ -20,6 +20,7 @@
         ];
         MG.data_graphic({
             data: new_data,
+            title: "Percent change in Bugs since April 14, 2016",
             width: 400,
             height: 220,
             right: 40,
@@ -30,7 +31,7 @@
             target: document.getElementById('chart'),
             x_accessor: "value",
             y_accessor: "label",
-            x_label: "Percent Change Since April 14, 2016",
+            x_label: "last updated April 22, 2016",
             chart_type: "bar",
             mouseover: function(d, i) {
                 var prefix = d3.formatPrefix(d.value);
