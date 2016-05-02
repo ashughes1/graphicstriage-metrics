@@ -1,0 +1,43 @@
+<div class='row trunk-section'>
+  <div class='col-lg-12 text-center' id='chart'></div>
+</div>
+
+<script>
+    MG._hooks = {};
+    
+    function format(f) {
+        var pf = d3.formatPrefix(f);
+        return Math.round(pf.scale(f)) + pf.symbol;
+    };
+    
+    d3.json('data/triage-metrics.json', function(data) {
+        var new_data = [
+            {'label':'Help Wanted','value':format((data[1]['helpwanted']-data[0]['helpwanted'])/data[0]['helpwanted']*100)},
+            {'label':'Incoming','value':format((data[1]['incoming']-data[0]['incoming'])/data[0]['incoming']*100)},
+            {'label':'Top Crashes','value':format((data[1]['topcrashes']-data[0]['topcrashes'])/data[0]['topcrashes']*100)},
+            {'label':'Cold Crashes','value':format((data[1]['coldcrashes']-data[0]['coldcrashes'])/data[0]['coldcrashes']*100)},
+            {'label':'Cold Trackers','value':format((data[1]['coldtrackers']-data[0]['coldtrackers'])/data[0]['coldtrackers']*100)}
+        ];
+        MG.data_graphic({
+            data: new_data,
+            title: "Percent change in Bugs since April 14, 2016",
+            width: 400,
+            height: 220,
+            right: 40,
+            left: 90,
+            bottom: 90,
+            min_x:-100,
+            max_x:100,
+            target: document.getElementById('chart'),
+            x_accessor: "value",
+            y_accessor: "label",
+            x_label: "last updated April 22, 2016",
+            chart_type: "bar",
+            mouseover: function(d, i) {
+                var prefix = d3.formatPrefix(d.value);
+                d3.select('svg .mg-active-datapoint')
+                    .text(d.label + ': ' + d.value + '%');
+            }
+        });
+    });
+</script>
