@@ -5,6 +5,14 @@
 <script>
     MG._hooks = {};
     
+    var globals = {};
+    
+    globals.mouseover = function(d,i) {
+        d3.select('svg .mg-active-datapoint')
+            .text(d.version + ': ' + d.count);
+        globals.url = "https://bugzilla.mozilla.org/buglist.cgi?query_format=advanced&component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core" + "&f1=cf_status_" + d.version + "&o1=anyexact&v1=wontfix";
+    }
+    
     function convertDate(d) {
         var day = (d.getDate() < 10) ? '0' + d.getDate().toString() : d.getDate().toString();
         var month = ((d.getMonth()+1) < 10) ? '0' + (d.getMonth()+1).toString() : (d.getMonth()+1).toString();
@@ -17,40 +25,14 @@
         return Math.round(pf.scale(f)) + pf.symbol;
     }
     
-    //function draw(data) {
-    //    document.getElementById('chart').innerHTML = "";
-
-    //    MG.data_graphic({
-    //        data: new_data,
-    //        title: "Percent change since April 14, 2016",
-    //        width: 400,
-    //        height: 220,
-    //        left: 120,
-    //        bottom: 90,
-    //        min_x:-100,
-    //        max_x:100,
-    //        target: document.getElementById('chart'),
-    //        x_accessor: "value",
-    //        y_accessor: "label",
-    //        x_label: "% Change",
-    //        chart_type: "bar",
-    //        mouseover: function(d, i) {
-    //            var prefix = d3.formatPrefix(d.value);
-    //            d3.select('svg .mg-active-datapoint')
-    //                .text(d.label + ': ' + d.value + '%');
-    //        }
-    //    });
-    //}
-    
     function callback(key, count) {
         if (i >= keys.length) {
             draw(items);
         } else {
             if (count > -1) {
                 items[key] = count;
-                document.getElementById('chart').innerHTML = "LOADING DATA " + i/keys.length*100 + "%...";
-                //console.log(items[1]);
-                callback(keys[i++], -1);
+                document.getElementById('chart').innerHTML = "LOADING DATA " + (i/keys.length*100).toFixed(0) + "%...";
+                callback(keys[++i], -1);
             } else {
                 d3.json(url_base + "&f1=cf_status_" + key + "&o1=anyexact&v1=wontfix", function(data) {
                     if (!data) return callback(new Error("Unable to load JSON data!"));
@@ -81,16 +63,17 @@
             y_accessor: "version",
             x_label: "Bugs tagged wontfix",
             chart_type: "bar",
-            mouseover: function(d, i) {
-                var prefix = d3.formatPrefix(d.value);
-                d3.select('svg .mg-active-datapoint')
-                    .text(d.version + ': ' + d.count);
-            }
+            mouseover: globals.mouseover
         });
+        var mouseouts = d3.selectAll('.mg-rollover-rect rect').on('mouseout');
+        d3.selectAll('.mg-rollover-rect rect')
+            .on('click', function(d) {
+                window.open(globals.url, '_blank');
+            });
     }
     
     var today = convertDate(new Date((new Date()).valueOf()));
-    var url_base = "https://bugzilla.mozilla.org/rest/bug?component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core&include_fields=id"
+    var url_base = "https://bugzilla.mozilla.org/rest/bug?query_format=advanced&component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core"
     
     var keys = [];
     var items = {};
