@@ -39,7 +39,7 @@
         document.getElementById('chart').innerHTML = "";
         var new_data = [
             {'label':'Help Wanted','value':format((data[1]['helpwanted']-data[0]['helpwanted'])/data[0]['helpwanted']*100)},
-            {'label':'Incoming','value':format((data[1]['incoming']-data[0]['incoming'])/data[0]['incoming']*100)},
+            {'label':'Untriaged Reports','value':format((data[1]['incoming']-data[0]['incoming'])/data[0]['incoming']*100)},
             {'label':'Top Crashes','value':format((data[1]['topcrashes']-data[0]['topcrashes'])/data[0]['topcrashes']*100)},
             {'label':'Cold Crashes','value':format((data[1]['coldcrashes']-data[0]['coldcrashes'])/data[0]['coldcrashes']*100)},
             {'label':'Cold Trackers','value':format((data[1]['coldtrackers']-data[0]['coldtrackers'])/data[0]['coldtrackers']*100)}
@@ -49,8 +49,7 @@
             title: "Percent change since April 14, 2016",
             width: 400,
             height: 220,
-            right: 40,
-            left: 90,
+            left: 120,
             bottom: 90,
             min_x:-100,
             max_x:100,
