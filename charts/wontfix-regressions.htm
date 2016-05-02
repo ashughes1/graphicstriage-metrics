@@ -1,0 +1,105 @@
+<div class='row trunk-section'>
+  <div class='col-lg-12 text-center' id='chart'>LOADING DATA...</div>
+</div>
+
+<script>
+    MG._hooks = {};
+    
+    function convertDate(d) {
+        var day = (d.getDate() < 10) ? '0' + d.getDate().toString() : d.getDate().toString();
+        var month = ((d.getMonth()+1) < 10) ? '0' + (d.getMonth()+1).toString() : (d.getMonth()+1).toString();
+        var year = d.getFullYear().toString();
+        return year + '-' + month + '-' + day;
+    }
+    
+    function format(f) {
+        var pf = d3.formatPrefix(f);
+        return Math.round(pf.scale(f)) + pf.symbol;
+    }
+    
+    //function draw(data) {
+    //    document.getElementById('chart').innerHTML = "";
+
+    //    MG.data_graphic({
+    //        data: new_data,
+    //        title: "Percent change since April 14, 2016",
+    //        width: 400,
+    //        height: 220,
+    //        left: 120,
+    //        bottom: 90,
+    //        min_x:-100,
+    //        max_x:100,
+    //        target: document.getElementById('chart'),
+    //        x_accessor: "value",
+    //        y_accessor: "label",
+    //        x_label: "% Change",
+    //        chart_type: "bar",
+    //        mouseover: function(d, i) {
+    //            var prefix = d3.formatPrefix(d.value);
+    //            d3.select('svg .mg-active-datapoint')
+    //                .text(d.label + ': ' + d.value + '%');
+    //        }
+    //    });
+    //}
+    
+    function callback(key, count) {
+        if (i >= keys.length) {
+            draw(items);
+        } else {
+            if (count > -1) {
+                items[key] = count;
+                document.getElementById('chart').innerHTML = "LOADING DATA " + i/keys.length*100 + "%...";
+                //console.log(items[1]);
+                callback(keys[i++], -1);
+            } else {
+                d3.json(url_base + "&f1=cf_status_" + key + "&o1=anyexact&v1=wontfix", function(data) {
+                    if (!data) return callback(new Error("Unable to load JSON data!"));
+                    callback(keys[i], data.bugs.length);
+                });
+            }
+        }
+    }
+    
+    function draw(data) {
+        var new_data = [];
+        for (key in data) {
+            var item = {};
+            item['version'] = key;
+            item['count'] = data[key];
+            new_data.push(item);
+        }
+        document.getElementById('chart').innerHTML = "";
+        MG.data_graphic({
+            data: new_data,
+            title: "Shipped Graphics Regressions (last 10 versions)",
+            width: 400,
+            height: 300,
+            left: 120,
+            bottom: 90,
+            target: document.getElementById('chart'),
+            x_accessor: "count",
+            y_accessor: "version",
+            x_label: "Bugs tagged wontfix",
+            chart_type: "bar",
+            mouseover: function(d, i) {
+                var prefix = d3.formatPrefix(d.value);
+                d3.select('svg .mg-active-datapoint')
+                    .text(d.version + ': ' + d.count);
+            }
+        });
+    }
+    
+    var today = convertDate(new Date((new Date()).valueOf()));
+    var url_base = "https://bugzilla.mozilla.org/rest/bug?component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core&include_fields=id"
+    
+    var keys = [];
+    var items = {};
+    for (var i=40; i<50; i++) {
+        keys.push("firefox" + i);
+    }
+    var i = 0;
+    callback(keys[i], -1);
+    
+    
+    
+</script>
