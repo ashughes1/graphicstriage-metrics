@@ -71,9 +71,9 @@
         document.getElementById('chart').innerHTML = "";
         MG.data_graphic({
             data: new_data,
-            title: "Shipped Graphics Regressions (last 10 versions)",
+            title: "Shipped Graphics Regressions (last 5 versions)",
             width: 400,
-            height: 300,
+            height: 220,
             left: 120,
             bottom: 90,
             target: document.getElementById('chart'),
@@ -94,7 +94,7 @@
     
     var keys = [];
     var items = {};
-    for (var i=40; i<50; i++) {
+    for (var i=45; i<=49; i++) {
         keys.push("firefox" + i);
     }
     var i = 0;
