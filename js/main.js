@@ -6,7 +6,7 @@ var theme = 'dark';
     //set the active pill and section on first load
     //var section = (document.location.hash) ? document.location.hash.slice(1) : '';
 
-    $('#trunk').load('charts/triage-metrics-new.htm', function() {
+    $('#trunk').load('charts/triage-metrics.htm', function() {
         $('pre code').each(function(i, block) {
             hljs.highlightBlock(block);
         });
