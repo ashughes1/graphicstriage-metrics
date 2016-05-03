@@ -53,9 +53,9 @@
         document.getElementById('chart').innerHTML = "";
         MG.data_graphic({
             data: new_data,
-            title: "Shipped Graphics Regressions (last 5 versions)",
+            title: "Shipped Graphics Regressions",
             width: 400,
-            height: 220,
+            height: 300,
             left: 120,
             bottom: 90,
             target: document.getElementById('chart'),
@@ -73,11 +73,11 @@
     }
     
     var today = convertDate(new Date((new Date()).valueOf()));
-    var url_base = "https://bugzilla.mozilla.org/rest/bug?query_format=advanced&component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core"
+    var url_base = "https://bugzilla.mozilla.org/rest/bug?query_format=advanced&component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core&include_fields=id"
     
     var keys = [];
     var items = {};
-    for (var i=45; i<=49; i++) {
+    for (var i=40; i<=49; i++) {
         keys.push("firefox" + i);
     }
     var i = 0;
