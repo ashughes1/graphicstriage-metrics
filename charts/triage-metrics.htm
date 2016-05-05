@@ -38,11 +38,11 @@
     function draw(data) {
         document.getElementById('chart').innerHTML = "";
         var new_data = [
-            {'label':'Help Wanted','value':format((data[1]['helpwanted']-data[0]['helpwanted'])/data[0]['helpwanted']*100)},
-            {'label':'Untriaged Reports','value':format((data[1]['incoming']-data[0]['incoming'])/data[0]['incoming']*100)},
-            {'label':'Top Crashes','value':format((data[1]['topcrashes']-data[0]['topcrashes'])/data[0]['topcrashes']*100)},
-            {'label':'Cold Crashes','value':format((data[1]['coldcrashes']-data[0]['coldcrashes'])/data[0]['coldcrashes']*100)},
-            {'label':'Cold Trackers','value':format((data[1]['coldtrackers']-data[0]['coldtrackers'])/data[0]['coldtrackers']*100)}
+            {'label':'Help Wanted','value':((data[1]['helpwanted']-data[0]['helpwanted'])/data[0]['helpwanted']*100).toFixed(2)},
+            {'label':'Untriaged Reports','value':((data[1]['incoming']-data[0]['incoming'])/data[0]['incoming']*100).toFixed(2)},
+            {'label':'Top Crashes','value':((data[1]['topcrashes']-data[0]['topcrashes'])/data[0]['topcrashes']*100).toFixed(2)},
+            {'label':'Cold Crashes','value':((data[1]['coldcrashes']-data[0]['coldcrashes'])/data[0]['coldcrashes']*100).toFixed(2)},
+            {'label':'Cold Trackers','value':((data[1]['coldtrackers']-data[0]['coldtrackers'])/data[0]['coldtrackers']*100).toFixed(2)}
         ];
         MG.data_graphic({
             data: new_data,
