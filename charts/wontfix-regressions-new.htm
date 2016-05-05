@@ -10,7 +10,9 @@
     globals.mouseover = function(d,i) {
         d3.select('svg .mg-active-datapoint')
             .text(d.version + ': ' + d.count);
-        globals.url = "https://bugzilla.mozilla.org/buglist.cgi?query_format=advanced&component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core" + "&f1=cf_status_" + d.version + "&o1=anyexact&v1=wontfix";
+        var arr = d.version.split("firefox");
+        var prev_ver = "firefox" + (arr[1]-1);
+        globals.url = "https://bugzilla.mozilla.org/buglist.cgi?query_format=advanced&component=Canvas%3A 2D&component=Canvas%3A WebGL&component=GFX%3A Color Management&component=Graphics&component=Graphics%3A Layers&component=Graphics%3A Text&component=Image Blocking&component=ImageLib&component=Panning and Zooming&product=Core" + "&f1=cf_status_" + d.version + "&o1=anyexact&v1=wontfix" + "&f2=cf_status_" + prev_ver + "&o2=isempty";
     }
     
     function convertDate(d) {
@@ -38,7 +40,7 @@
                 var prev_key = "firefox" + (arr[1]-1);
                 var url = url_base
                     + "&f1=cf_status_" + key + "&o1=anyexact&v1=wontfix"
-                    + "&f2=cf_status_" + prev_key + "&o2=isempty"
+                    + "&f2=cf_status_" + prev_key + "&o2=isempty";
                 d3.json(url, function(data) {
                     if (!data) return callback(new Error("Unable to load JSON data!"));
                     callback(keys[i], data.bugs.length);
