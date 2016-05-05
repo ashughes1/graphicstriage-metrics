@@ -34,8 +34,12 @@
                 document.getElementById('chart').innerHTML = "LOADING DATA " + (i/keys.length*100).toFixed(0) + "%...";
                 callback(keys[++i], -1);
             } else {
-                console.log(key);
-                d3.json(url_base + "&f1=cf_status_" + key + "&o1=anyexact&v1=wontfix", function(data) {
+                var arr = key.split("firefox");
+                var prev_key = "firefox" + (arr[1]-1);
+                var url = url_base
+                    + "&f1=cf_status_" + key + "&o1=anyexact&v1=wontfix"
+                    + "&f2=cf_status_" + prev_key + "&o2=isempty"
+                d3.json(url, function(data) {
                     if (!data) return callback(new Error("Unable to load JSON data!"));
                     callback(keys[i], data.bugs.length);
                 });
@@ -54,8 +58,8 @@
         document.getElementById('chart').innerHTML = "";
         MG.data_graphic({
             data: new_data,
-            title: "Shipped Graphics Regressions",
-            description: "Wontfixed graphics bugs, including new and carry-over regressions",
+            title: "New Shipped Graphics Regressions",
+            description: "Graphics bugs marked as wontfix which were introduced in the specific version",
             width: 400,
             height: 300,
             left: 120,
@@ -64,6 +68,7 @@
             x_accessor: "count",
             y_accessor: "version",
             x_label: "Bugs tagged wontfix",
+            max_x:100,
             chart_type: "bar",
             mouseover: globals.mouseover
         });
