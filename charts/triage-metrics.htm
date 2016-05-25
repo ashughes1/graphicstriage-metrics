@@ -19,7 +19,8 @@
         } else {
             if (count > -1) {
                 items[1][key] = count;
-                document.getElementById('chart').innerHTML = "LOADING DATA " + i/5*100 + "%...";
+                document.getElementById('chart_percent').innerHTML = "LOADING DATA " + i/5*100 + "%...";
+                document.getElementById('chart_value').innerHTML = "LOADING DATA " + i/5*100 + "%...";
                 //console.log(items[1]);
                 callback(topic[i++], -1);
             } else {
@@ -37,7 +38,8 @@
     }
     
     function draw(data) {
-        document.getElementById('chart').innerHTML = "";
+        document.getElementById('chart_percent').innerHTML = "";
+        document.getElementById('chart_value').innerHTML = "";
         var new_data = [
             {'label':'Help Wanted','value':(data[1]['helpwanted']-data[0]['helpwanted']),'percent':((data[1]['helpwanted']-data[0]['helpwanted'])/data[0]['helpwanted']*100).toFixed(2)},
             {'label':'Untriaged Reports','value':(data[1]['incoming']-data[0]['incoming']),'percent':((data[1]['incoming']-data[0]['incoming'])/data[0]['incoming']*100).toFixed(2)},
@@ -58,12 +60,7 @@
             x_accessor: "percent",
             y_accessor: "label",
             x_label: "% Change",
-            chart_type: "bar",
-            mouseover: function(d, i) {
-                var prefix = d3.formatPrefix(d.value);
-                d3.select('svg .mg-active-datapoint')
-                    .text(d.label + ': ' + d.value + '%');
-            }
+            chart_type: "bar"
         });
         MG.data_graphic({
             data: new_data,
@@ -78,12 +75,7 @@
             x_accessor: "value",
             y_accessor: "label",
             x_label: "# Change",
-            chart_type: "bar",
-            mouseover: function(d, i) {
-                var prefix = d3.formatPrefix(d.value);
-                d3.select('svg .mg-active-datapoint')
-                    .text(d.label + ': ' + d.value + '%');
-            }
+            chart_type: "bar"
         });
     }
     
