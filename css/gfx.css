@@ -49,8 +49,8 @@ p {
 }
 
 .trunk-section {
-    padding-bottom: 25px;
-    padding-top: 15px;
+/*    padding-bottom: 25px;
+    padding-top: 15px;*/
 }
 
 a.active {
@@ -79,7 +79,7 @@ a.active {
 
 #head {
     color: black;
-    margin: auto;
+/*    margin: auto;*/
     width: 100%;
 }
 
@@ -111,7 +111,7 @@ a.active {
 }
 
 svg {
-    margin-top: 50px;
+/*    margin-top: 50px;*/
 }
 
 a.active,
